@@ -66,7 +66,7 @@ class LoginController extends Controller
             return redirect('/login');
         }
 
-        $user = User::where('email', $auth->email)->first();
+        $user = User::where($auth->email ? ['email' => $auth->email] : ['social_id' => $auth->id])->first();
 
         if (! $user)
             $user = $this->registerNewUser($auth, $provider);
@@ -86,7 +86,7 @@ class LoginController extends Controller
         $user = new User;
 
         $user->name = $auth->name;
-        $user->email = $auth->email;
+        $user->email = $auth->email ?? $auth->id.'@'.env('FACEBOOK_EMAIL', 'fb.me');
         $user->email_verified_at = now();
         $user->social = $provider;
         $user->social_id = $auth->id;

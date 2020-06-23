@@ -13,19 +13,19 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        $user = new User;
+        // $user = new User;
 
-        $user->name = "Super Admin";
-        $user->email = "superadmin@madinah.id";
-        $user->email_verified_at = now();
-        $user->password = bcrypt("Aczx26120roe");
+        // $user->name = "Super Admin";
+        // $user->email = "superadmin@madinah.id";
+        // $user->email_verified_at = now();
+        // $user->password = bcrypt("Aczx26120roe");
 
-        $user->save();
+        // $user->save();
 
-        $superadmin = Role::create(['name' => 'superadmin']);
-        $admin = Role::create(['name' => 'admin']);
-        $member = Role::create(['name' => 'member']);
+        Role::create(['name' => 'superadmin']);
+        Role::create(['name' => 'admin']);
+        Role::create(['name' => 'member']);
 
-        $user->assignRole('superadmin');
+        // $user->assignRole('superadmin');
     }
 }
