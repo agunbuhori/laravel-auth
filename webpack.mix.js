@@ -11,5 +11,7 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.js('resources/js/app.js', 'public/js')
-    .sass('resources/sass/auth.sass', 'public/css');
+mix.js([
+        'resources/js/jquery.js'
+    ], 'public/js/app.js')
+.sass('resources/scss/bootstrap-grid.scss', 'public/css/app.css');

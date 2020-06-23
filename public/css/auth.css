@@ -105,7 +105,7 @@ a[class^='auth'] {
   width: 100%;
   font-weight: 300;
   background-color: #2980b9;
-  transition: 300ms;
+  transition: background 300ms;
   font-size: 12pt;
   color: white;
   border-radius: 5px;

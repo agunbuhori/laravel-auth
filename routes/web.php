@@ -1,7 +1,6 @@
 <?php
 
-use App\User;
-use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,33 +15,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 Auth::routes(['verify' => true]);
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
-
 Route::get('/auth/{provider}', 'Auth\LoginController@redirectToProvider');
 Route::get('/callback/{provider}', 'Auth\LoginController@handleProviderCallback');
 
-Route::any('/logout', 'Auth\LoginController@logout');
+Route::get('/', 'HomeController@index');
+Route::get('/kelas', 'HomeController@index');
+Route::get('/kelas/{code}', 'HomeController@index');
 
 Route::group(['middleware' => 'auth'], function () {
-    Route::get('/', function () {
-        return view('welcome');
-    })->middleware('verified');
-});
-
-Route::get('/lang', function () {
-
-$translates = DB::table('translates')->where('language_code', 'en')->pluck('key', 'value');
-return $translates;
-});
-
-Route::get('/test/{id}', function($id) {
-    $user = User::findOrFail($id);
-
-    Mail::send('emails.reminder', ['user' => $user], function ($m) use ($user) {
-        $m->from('alhimmahmedia@gmail.com', 'Your Application');
-
-        $m->to($user->email, $user->name)->subject('Your Reminder!');
-    });
+    Route::get('/logout', 'Auth\LoginController@logout');
 });
