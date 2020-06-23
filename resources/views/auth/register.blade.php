@@ -1,77 +1,82 @@
-@extends('layouts.app')
+@extends('layouts.auth')
 
 @section('content')
 <div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Register') }}</div>
+    <div class="cover"></div>
+    <div class="wrapper">
+        <div class="form-header">
+            <h1>@lang('Daftar Baru')</h1>
+            <p>@lang('Alhimmah media bisa diakses kapan saja melalui perangkat komputer atau handphone').</p>
+        </div>
+        <form class="login" method="post" action="/register">
+            @csrf
 
-                <div class="card-body">
-                    <form method="POST" action="{{ route('register') }}">
-                        @csrf
-
-                        <div class="form-group row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
-
-                                @error('name')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
-
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
-
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
-                            </div>
-                        </div>
-
-                        <div class="form-group row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Register') }}
-                                </button>
-                            </div>
-                        </div>
-                    </form>
+            <div class="form-group">
+                <div class="input-container">
+                    <input id="name" name="name" class="input" type="text" value="{{ old('name') }}" required />
+                    <label class="label" for="name">@lang('Nama')</label>
                 </div>
             </div>
-        </div>
+
+            <div class="form-group">
+                <div class="input-container">
+                    <input id="email" name="email" class="input" type="text" value="{{ old('email') }}" required />
+                    <label class="label" for="email">@lang('Alamat Email')</label>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <div class="input-container">
+                    <input id="password" name="password" class="input" type="password" required />
+                    <label class="label" for="password">@lang('Kata Sandi')</label>
+                </div>
+            </div>
+
+            
+            <div class="form-group">
+                <div class="input-container">
+                    <input id="password_confirmation" name="password_confirmation" class="input" type="password" required />
+                    <label class="label" for="password_confirmation">@lang('Ulangi Kata Sandi')</label>
+                </div>
+            </div>
+
+
+
+
+            @if ($errors->count())
+            @foreach ($errors->all() as $error)
+            <p class="danger">@lang($error)</p>
+            @endforeach
+            @endif
+
+            <div class="form-group">
+                <button class="primary">@lang('Mendaftar')</button>
+            </div>
+
+            <div class="form-group">
+                <p class="or">@lang('Atau masuk dengan')</p>
+            </div>
+
+            <div class="form-group text-center">
+                <a href="/auth/google" type="button" class="auth-button">
+                    <span class="auth-button__icon">
+                        <img src="/images/social/google.png" />
+                    </span>
+                    <span class="auth-button__text">Google</span>
+                </a>
+                <a href="/auth/facebook" type="button" class="auth-button">
+                    <span class="auth-button__icon auth-button__icon--plus">
+                        <img src="/images/social/facebook.png" />
+                    </span>
+                    <span class="auth-button__text">Facebook</span>
+                </a>
+
+            </div>
+
+            <div class="form-group">
+                <p class="or">@lang('Sudah punya akun? ') <a href="/login">Masuk</a></p>
+            </div>
+        </form>
     </div>
 </div>
 @endsection

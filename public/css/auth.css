@@ -13,7 +13,7 @@ body {
   font-family: Heebo;
 }
 
-h2 {
+h1 {
   font-family: HeeboBold;
 }
 
@@ -117,7 +117,7 @@ a[class^='auth'] {
 }
 
 .form-group {
-  margin-bottom: 20px;
+  margin-bottom: 25px;
 }
 
 .form-group input {
