@@ -21,6 +21,11 @@ p {
   color: #666;
 }
 
+a, a:active {
+  color: #2980b9;
+  text-decoration: none;
+}
+
 .form-header {
   margin-bottom: 20px;
 }
@@ -182,6 +187,9 @@ input:focus + label {
 }
 .danger {
   color: #DC143C;
+}
+.success {
+  color: green;
 }
 @media screen and (max-width: 768px) {
   .container {

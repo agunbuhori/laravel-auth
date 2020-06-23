@@ -1,28 +1,41 @@
-@extends('layouts.app')
+@extends('layouts.auth')
 
 @section('content')
 <div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Verify Your Email Address') }}</div>
-
-                <div class="card-body">
-                    @if (session('resent'))
-                        <div class="alert alert-success" role="alert">
-                            {{ __('A fresh verification link has been sent to your email address.') }}
-                        </div>
-                    @endif
-
-                    {{ __('Before proceeding, please check your email for a verification link.') }}
-                    {{ __('If you did not receive the email') }},
-                    <form class="d-inline" method="POST" action="{{ route('verification.resend') }}">
-                        @csrf
-                        <button type="submit" class="btn btn-link p-0 m-0 align-baseline">{{ __('click here to request another') }}</button>.
-                    </form>
-                </div>
-            </div>
+    <div class="cover"></div>
+    <div class="wrapper">
+        <div class="form-header">
+            <h1>@lang('Verifikasi Email')</h1>
+            <p>@lang('Email verifikasi telah dikirim ke ')<strong>{{ auth()->user()->email }}</strong>. Jika tidak menerima email, silakan tekan <strong><i>Kirim Ulang</i></strong>.</p>
         </div>
+        <form class="login" method="post" action="/email/resend">
+            @csrf
+
+            @if (session('resent'))
+                <p class="success">
+                    @lang('Email verifikasi telah dikirim').
+                </p>
+            @endif
+
+            <div class="form-group">
+                <button class="primary">@lang('Kirim Ulang')</button>
+            </div>
+
+            <!-- <div class="form-group">
+            <p>@lang('Jika tidak menerima kode verifikasi'), <a href="#" onclick="resend()"> @lang('klik disini untuk mengirim ulang').</a></p>
+            </div> -->
+        </form>
     </div>
 </div>
+
+<script>
+async function resend() {
+    await fetch("/email/resend", {
+        method: "POST"
+    })
+    .then(response => {
+        // location.reload();
+    })
+}
+</script>
 @endsection

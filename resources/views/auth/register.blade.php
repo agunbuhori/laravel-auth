@@ -21,14 +21,14 @@
             <div class="form-group">
                 <div class="input-container">
                     <input id="email" name="email" class="input" type="text" value="{{ old('email') }}" required />
-                    <label class="label" for="email">@lang('Alamat Email')</label>
+                    <label class="label" for="email">@lang('Alamat email')</label>
                 </div>
             </div>
             
             <div class="form-group">
                 <div class="input-container">
-                    <input id="password" name="password" class="input" type="password" required />
-                    <label class="label" for="password">@lang('Kata Sandi')</label>
+                    <input id="password" name="password" class="input" type="password" required min="8"/>
+                    <label class="label" for="password">@lang('Kata sandi')</label>
                 </div>
             </div>
 
@@ -36,17 +36,15 @@
             <div class="form-group">
                 <div class="input-container">
                     <input id="password_confirmation" name="password_confirmation" class="input" type="password" required />
-                    <label class="label" for="password_confirmation">@lang('Ulangi Kata Sandi')</label>
+                    <label class="label" for="password_confirmation">@lang('Ulangi kata sandi')</label>
                 </div>
             </div>
 
 
-
-
             @if ($errors->count())
-            @foreach ($errors->all() as $error)
-            <p class="danger">@lang($error)</p>
-            @endforeach
+                @foreach ($errors->all() as $error)
+                <p class="danger">@lang($error)</p>
+                @endforeach
             @endif
 
             <div class="form-group">

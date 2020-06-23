@@ -91,8 +91,11 @@ class LoginController extends Controller
         $user->social = $provider;
         $user->social_id = $auth->id;
         $user->avatar = $auth->avatar;
-        $user->password = bcrypt($auth->id);
+        $user->password = $auth->id;
+        
         $user->save();
+
+        $user->assignRole('member');
 
         return $user;
     }

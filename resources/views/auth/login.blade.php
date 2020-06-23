@@ -54,7 +54,7 @@
             </div>
 
             <div class="form-group">
-                <p class="or">@lang('Tidak punya akun? ') <a href="/register">Daftar</a></p>
+                <p class="or">@lang('Tidak punya akun? ') <a href="/register">Daftar Baru</a></p>
             </div>
         </form>
     </div>
