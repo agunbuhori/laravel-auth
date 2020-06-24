@@ -42,7 +42,7 @@ class LoginController extends Controller
     }
 
     /**
-     * Redirect the user to the Google authentication page.
+     * Redirect the user to the provider authentication page.
     *
     * @return \Illuminate\Http\Response
     */
@@ -54,7 +54,7 @@ class LoginController extends Controller
     }
 
     /**
-     * Obtain the user information from Google.
+     * Obtain the user information from provider.
      *
      * @return \Illuminate\Http\Response
      */
@@ -100,6 +100,11 @@ class LoginController extends Controller
         return $user;
     }
 
+    /**
+     * Destroy session
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function logout()
     {
         Auth::logout();
