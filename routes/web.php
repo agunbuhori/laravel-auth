@@ -22,6 +22,8 @@ Route::get('/', 'HomeController@index');
 Route::get('/kelas', 'HomeController@index');
 Route::get('/kelas/{code}', 'HomeController@index');
 
-Route::group(['middleware' => 'auth'], function () {
-    Route::get('/logout', 'Auth\LoginController@logout');
+Route::group(['middleware' => 'role:superadmin', 'prefix' => 'admin'], function () {
+    Route::get('/', 'AdminController@index');
 });
+
+Route::get('/logout', 'Auth\LoginController@logout');
